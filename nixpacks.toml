@@ -1,0 +1,11 @@
+[phases.setup]
+nixPkgs = ["nodePackages.npm"]
+
+[phases.install]
+cmds = ["npm install --prefix backend"]
+
+[phases.build]
+cmds = ["echo 'Building backend...'"]
+
+[phases.start]
+cmd = "npm start --prefix backend"

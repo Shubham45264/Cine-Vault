@@ -19,8 +19,20 @@ const app = express();
 // Body parser
 app.use(express.json());
 
-// Enable CORS
-app.use(cors());
+// Enable CORS with more flexibility
+const allowedOrigins = [process.env.FRONTEND_URL, 'http://localhost:5173'].filter(Boolean);
+const corsOptions = {
+  origin: allowedOrigins.length > 0 ? allowedOrigins : '*',
+  credentials: true,
+  optionsSuccessStatus: 200
+};
+app.use(cors(corsOptions));
+
+// Log all incoming requests (helpful for debugging Railway)
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.url} - Origin: ${req.get('origin')}`);
+  next();
+});
 
 // Dev logging middleware
 if (process.env.NODE_ENV === 'development') {
