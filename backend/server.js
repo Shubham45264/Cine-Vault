@@ -20,7 +20,7 @@ const app = express();
 app.use(express.json());
 
 // Enable CORS with more flexibility
-const allowedOrigins = [process.env.FRONTEND_URL, 'http://localhost:5173'].filter(Boolean);
+const allowedOrigins = [process.env.FRONTEND_URL, 'http://localhost:5173', 'http://localhost:8080'].filter(Boolean);
 const corsOptions = {
   origin: allowedOrigins.length > 0 ? allowedOrigins : '*',
   credentials: true,
